@@ -2,15 +2,12 @@
 Python Web Development Techdegree
 Project 1 - Number Guessing Game
 --------------------------------
-
-For this first project we will be using Workspaces.
-
-NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
-
 """
 
 import random
 
+def welcome():
+    print("Welcome to this cool game! Guess a number between 1 and 10: ")
 
 def start_game():
     """Psuedo-code Hints
@@ -30,6 +27,28 @@ def start_game():
     ( You can add more features/enhancements if you'd like to. )
     """
     # write your code inside this function.
+
+    welcome()
+
+    randomNumber = int(random.randint(1, 10))
+
+    userInput = int(input())
+
+    attempts = 1
+
+    while userInput != randomNumber:
+        attempts += 1
+        if userInput < randomNumber:
+            userInput = int(input("It's higher: "))
+        elif userInput > randomNumber:
+            userInput = int(input("It's lower: "))
+
+    if attempts < 2:
+        print("You got it in 1 try!")
+    else:
+        print("You got it in {} tries!".format(attempts))
+
+    print("This epic game has reached completion!")
 
 
 if __name__ == '__main__':
