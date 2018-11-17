@@ -9,6 +9,18 @@ import random
 def welcome():
     print("Welcome to this cool game! Guess a number between 1 and 10: ")
 
+def validate(userInput, randomNumber):
+    try:
+        if userInput == -1:
+            return int(input())
+        if userInput < randomNumber:
+            return int(input("It's higher: "))
+        elif userInput > randomNumber:
+            return int(input("It's lower: "))
+    except ValueError:
+        print("That's a weird looking number. Try again.")
+
+
 def start_game():
     """Psuedo-code Hints
 
@@ -31,17 +43,18 @@ def start_game():
     welcome()
 
     randomNumber = int(random.randint(1, 10))
-
-    userInput = int(input())
-
+    userInput = -1
     attempts = 1
+
+    try:
+        userInput = int(input())
+    except ValueError:
+        print("That's a weird looking number. Try again.")
+
 
     while userInput != randomNumber:
         attempts += 1
-        if userInput < randomNumber:
-            userInput = int(input("It's higher: "))
-        elif userInput > randomNumber:
-            userInput = int(input("It's lower: "))
+        userInput = validate(userInput, randomNumber)
 
     if attempts < 2:
         print("You got it in 1 try!")
@@ -49,7 +62,6 @@ def start_game():
         print("You got it in {} tries!".format(attempts))
 
     print("This epic game has reached completion!")
-
 
 if __name__ == '__main__':
     # Kick off the program by calling the start_game function.
